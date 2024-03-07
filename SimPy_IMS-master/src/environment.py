@@ -153,10 +153,10 @@ class Procurement:
 
     def order_material(self, supplier, inventory, daily_events):
           # Control timeout function
-        time=0
+        yield self.env.timeout(self.env.now)
         while True:
             
-            yield self.env.timeout(time)
+            
             daily_events.append(
                 f"==============={I[self.item_id]['NAME']}\'s Inventory ===============")  # Change timeout function to cycle 24 hours
 
@@ -184,7 +184,7 @@ class Procurement:
                     f"{self.env.now}: MATERIAL 1\'s Real_Inventory                          : {inventory.total_inventory} units  ")
             # daily_events.append(
             #     f"{self.env.now}: {I[self.item_id]['NAME']}\'s daily procurement cost                  : {self.daily_procurement_cost}")  # Change timeout function to cycle 24 hours
-            time =24
+            yield self.env.timeout(24)
 
 class Production:
     def __init__(self, env, name, process_id, production_rate, output, input_inventories, qnty_for_input_item, output_inventory, processing_cost, process_stop_cost):
@@ -325,9 +325,9 @@ class Customer:
         self.item_id = item_id
 
     def order_product(self, sales, product_inventory, daily_events):
-        time=0
+        yield self.env.timeout(self.env.now)
         while True:
-            yield self.env.timeout(time)
+            
             
             # DEMAND_QUANTITY (Unknown and non-stationary)
             I[0]["DEMAND_QUANTITY"] = random.randint(
@@ -335,7 +335,7 @@ class Customer:
             demand_qty = I[0]["DEMAND_QUANTITY"]
         
             sales.receive_demands(demand_qty, product_inventory, daily_events)
-            time=I[0]["CUST_ORDER_CYCLE"] * 24
+            yield self.env.timeout(I[0]["CUST_ORDER_CYCLE"] * 24)
 
 
 def create_env(I, P, daily_events,daily_reports):

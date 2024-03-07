@@ -28,5 +28,6 @@ for x in range(SIM_TIME):
     # reward = -daily_total_cost
     # total_reward += reward
 daily_reports=pd.DataFrame(daily_reports)
-print(daily_reports)
+daily_reports.columns=["Name","Start","Income","Outcome","End"]
+daily_reports.to_csv("./Daily_Report.csv")
 # print(total_reward)
