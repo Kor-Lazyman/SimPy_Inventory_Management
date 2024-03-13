@@ -45,7 +45,7 @@ I = {0: {"ID": 0, "TYPE": "Product",      "NAME": "PRODUCT",
          "SETUP_COST_MAT": 1,
          "LOT_SIZE_ORDER": 0}}
 
-P = {0: {"ID": 0, "PRODUCTION_RATE": 2, "INPUT_TYPE_LIST": [I[1]], "QNTY_FOR_INPUT_ITEM": [
+P = {0: {"ID": 0, "PRODUCTION_RATE": 0.3, "INPUT_TYPE_LIST": [I[1]], "QNTY_FOR_INPUT_ITEM": [
     1], "OUTPUT": I[0], "PROCESS_COST": 1, "PROCESS_STOP_COST": 2}}
 
 '''
@@ -98,7 +98,7 @@ INVEN_LEVEL_MAX = 100  # Capacity limit of the inventory [units]
 STATE_DEMAND = True  # True: Demand quantity is included in the state space
 
 # Simulation
-SIM_TIME = 10  # 200 [days] per episode
+SIM_TIME = 30  # 200 [days] per episode
 INIT_LEVEL = 10  # Initial inventory level [units]
 
 # Uncertainty factors
